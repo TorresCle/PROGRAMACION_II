@@ -1,0 +1,430 @@
+---
+title: "EJERCICIOS"
+author: "CLEVER TORRES"
+date: "10/7/2021"
+output: html_document
+---
+
+#PARTE 01
+
+#EJERCICIO 01
+```{r message=FALSE, warning=FALSE}
+
+```
+
+
+1.1. Resolución del ejercicio a
+```{r message=FALSE, warning=FALSE}
+ejerc01 <- function(a=0.3, b=0.15, c=0.2, d=0.8, e=0.5, f=0.12){
+  operacion <- ((a*b)/((a*b)+(c*d)+(e*f)))
+  return(operacion)
+}
+ejerc01()
+```
+
+
+1.2. Resolución del ejercicio b
+```{r message=FALSE, warning=FALSE}
+parteb <- function(a, b){
+  oper03 <- ((a^b)/(factorial(b)))*exp(-a)
+  return(oper03)
+}
+parteb(a=5, b=6)
+```
+
+1.3. Resolución del ejercicio c
+```{r message=FALSE, warning=FALSE}
+
+```
+
+#EJERCICIO 02
+```{r message=FALSE, warning=FALSE}
+
+```
+
+2.1 Resolución del ejercicio a
+```{r message=FALSE, warning=FALSE}
+a <- c(1:1000)
+sum(a)
+
+```
+
+2.1 Resolución del ejercicio b
+```{r message=FALSE, warning=FALSE}
+ejerc02 <- function(a1, r, n){
+  oper02 <- a1*r^(n-1)
+  return(oper02)
+}
+ejerc02(a1=1, r=2, n=1:11)
+
+suma <- ejerc02(a1=1, r=2, n=1:11) #Anidamos los resultados
+sum(suma)
+```
+
+
+#EJERCICIO 03
+```{r message=FALSE, warning=FALSE}
+
+```
+
+3a. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+load("ei1012-1516-la-s1-datos.RData")
+grupo
+length(grupo)
+```
+
+3b. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+which(grupo == "A")
+```
+
+
+#EJERCICIO 04
+```{r message=FALSE, warning=FALSE}
+
+```
+
+
+4a. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+nota
+sum(nota)
+```
+
+4b. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+mean(nota)
+```
+
+4c. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+which(nota > 7)
+```
+
+4d. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+head(nota[order(-nota)],10)
+```
+
+4e. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+which(nota == 7.7)
+```
+
+
+
+#EJERCICIO 05
+```{r message=FALSE, warning=FALSE}
+
+```
+
+
+5a. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+dplyr::tibble(grupo1 = grupo, nota1 = nota)
+primeros_10 <- head(dplyr::tibble(grupo1 = grupo, nota1 = nota),10)
+sum(primeros_10$nota1)
+```
+
+5b. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+Alum_notas <- dplyr::tibble(grupo1 = grupo, nota1 = nota)
+Alum_notas %>% 
+  dplyr::select(grupo1) %>% 
+  dplyr::filter(grupo1 == "C") %>% 
+  dplyr::summarise(length(grupo1))
+```
+
+
+5c. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+Alum_notas <- dplyr::tibble(grupo1 = grupo, nota1 = nota)
+Alum_notas %>% 
+  dplyr::filter(nota1 >=5) %>% 
+  dplyr::summarise(length(nota1))
+```
+
+
+5d. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+Alum_notas <- dplyr::tibble(grupo1 = grupo, nota1 = nota)
+Alum_notas %>% 
+  dplyr::filter(grupo1 == "B" & nota1 >= 5.0) %>%
+  dplyr::summarise(length(nota1))
+```
+
+
+5e. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+Alum_notas <- dplyr::tibble(grupo1 = grupo, nota1 = nota)
+porcentaje <- Alum_notas %>% 
+  dplyr::filter(grupo1 == "C" & nota1 >=5) %>%
+  dplyr::summarise(length(nota1))
+
+alumC <- Alum_notas %>% 
+  dplyr::filter(grupo1 == "C") %>% 
+  dplyr::summarise(length(nota1))
+
+((porcentaje/alumC)*100)
+```
+
+
+5f. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+Alum_notas <- dplyr::tibble(grupo1 = grupo, nota1 = nota)
+
+max <- Alum_notas %>%
+  dplyr::filter(nota1 == max(nota1))
+
+min <- Alum_notas %>%
+  dplyr::filter(nota1 == min(nota1))
+```
+
+
+5g. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+Alum_notas <- dplyr::tibble(grupo1 = grupo, nota1 = nota)
+
+#Utilizando  xor
+Alum_notas %>% 
+  dplyr::filter(xor(grupo1 == "A" & nota1 >=5, grupo1 == "B" & nota1 >= 5)) %>% 
+  dplyr::summarise(mean(nota1)) 
+
+#Utilizando o
+Alum_notas %>% 
+  dplyr::filter((grupo1 == "A" & nota1 >=5) | (grupo1 == "B" & nota1 >= 5)) %>% 
+  dplyr::summarise(mean(nota1))
+```
+
+
+#EJERCICIO 06
+```{r message=FALSE, warning=FALSE}
+
+```
+
+6. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+Alum_notas <- dplyr::tibble(grupo1 = grupo, nota1 = nota)
+Alum_notas %>%
+  dplyr::select(nota1) %>% 
+  dplyr::summarise(quantile(nota1, 0.66)) #sacando quantil 0.66
+
+Alum_notas %>% 
+  dplyr::filter(grupo1 == "C") %>% 
+  dplyr::summarise(quantile(nota1, 0.66)) #para lo de grupo C
+```
+
+#EJERCICIO 07
+```{r message=FALSE, warning=FALSE}
+
+```
+
+7. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+Alum_notas <- dplyr::tibble(grupo1 = grupo, nota1 = nota)
+menor_4.9 <- Alum_notas %>% 
+  dplyr::filter(nota1 <= 4.9) %>%
+  dplyr::summarise(length(nota1))
+((menor_4.9/nrow(Alum_notas))*100) #sacando porcentajes
+
+mayor_4.9 <- Alum_notas %>% 
+  dplyr::filter(nota1 >= 4.9) %>%
+  dplyr::summarise(length(nota1)) 
+((mayor_4.9/nrow(Alum_notas))*100)
+```
+
+#EJERCICIO 08
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+Alum_notas <- dplyr::tibble(grupo1 = grupo, nota1 = nota)
+Alum_notas %>% ggplot(mapping = aes(x = grupo1, y = nota1)) +
+  geom_boxplot()
+```
+
+#EJERCICIO 09
+```{r message=FALSE, warning=FALSE}
+
+```
+
+9a. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+concentrac <- dplyr::tibble(values = conc)
+concentrac %>% 
+  dplyr::summarise(max(values))
+```
+
+9b. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+concentrac %>%
+  dplyr::filter(values > 40.0) %>%
+  dplyr::summarise(length(values))
+```
+
+9c. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+concentrac %>% 
+  dplyr::summarise(mean(values))
+```
+
+9d. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+medicio_10 <- concentrac %>% 
+  dplyr::arrange(values)
+head(medicio_10, 10)
+```
+
+9d. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+length(conc)
+tiempo_recojo <- 23/length(conc) #tiempo de recojo de cada concentracion
+which(conc == max(conc)) #ocupacion dd la maxima concentracion
+produc <- tiempo_recojo * which(conc == max(conc))
+```
+
+
+## PARTE02
+```{r message=FALSE, warning=FALSE}
+
+```
+
+1. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+part_A <- c(1:10)
+part_B <- c(1, 4, 6, 8, 25, 36, 49, 61, 81, 100)
+plot(part_A, part_B)
+```
+
+2. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+A <- c(1:4, 2*(1:4), 3*(1:4))
+matriz_A <- matrix(A, nrow = 4, ncol = 3)
+matriz_A
+```
+
+3. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+matriz_I <- diag(3)
+matriz_I
+```
+
+4. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+Matriz_nula <- function(f,c){
+  matrix(0, nrow = f, ncol = c)
+}
+Matriz_nula(5,6)
+```
+
+5. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+diag(4)
+mod_A <- c(-1, 1, 2, 3)
+mod_B <- diag(mod_A,nrow = 4)
+modAB <- mod_B + diag(4)
+modAB
+```
+
+6. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+Transpuesta <- t(matriz_A)
+Transpuesta
+```
+
+7. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+#matriz_A + modAB
+```
+
+8. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+matriz_p <- c(1, -2, 1, 2, 4, 0, 3, -2, 1)
+matriz_p <- matrix(matriz_p, nrow = 3)
+
+funcion <- function(potencia){
+  potencia^6
+}
+funcion(matriz_p)
+```
+
+9. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+A <- c(3, 9, 3, -1, -2, 1, 1, 1, -2)
+B <- c(-1, -9, -9)
+
+matr_A <- matrix(A, nrow = 3)
+matr_B <- matrix(B, ncol = 1)
+
+inversa <- solve(matr_A) #inversa de la matriz
+inversa %*% matr_B 
+```
+
+10. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+
+eigen(cbind( 1, 3:1, 1:3)) #Determina los autovalores
+
+Z <- matrix(c(4,54,2,4,8,4,2,4,8),nrow = 3,ncol = 3) #Para los determinantes
+det(Z)
+```
+
+11. Resolución del ejercicio
+```{ message=FALSE, warning=FALSE}
+mat_B <- c(1:10, 2*(1:10), 3*(1:10), 4*(1:10), 5*(1:10))
+matriz_B <- matrix(mat_B, nrow = 10)
+
+mat_A <- c(0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0)
+matriz_A <- matrix(mat_A, nrow = 5)
+
+matriz_A %*% matriz_B
+```
+
+12. Resolución del ejercicio
+```{ message=FALSE, warning=FALSE}
+X <- matrix(c(1,1,1,1,1,1,-1,0,1,2),nrow = 5, ncol = 2)
+Y <- matrix(c(0,0,1,1,3),nrow = 5, ncol = 1)
+
+Beta <- ((t(X)%*%X)^(-1))%*%t(X)%*%Y
+Beta
+```
+
+13a. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+data(co2)
+means = aggregate(co2, FUN=mean)
+year = as.vector(time(means))
+co2 = as.vector(means)
+
+medi_co2 <- dplyr::tibble(anio = year, medida = co2)
+dato2 <- medi_co2 %>%
+  dplyr::mutate(resta_conse = c(medida[2:39], 0)) %>%
+  dplyr::mutate(diferencia = resta_conse - medida) %>% 
+  dplyr::select(diferencia)
+dato2
+```
+
+
+
+
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

@@ -1,0 +1,168 @@
+---
+title: "Ejercicio_parte2"
+author: "CLEVER_TORRES"
+date: "10/7/2021"
+output: html_document
+---
+
+## PARTE02
+```{r message=FALSE, warning=FALSE}
+
+```
+
+1. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+part_A <- c(1:10)
+part_B <- c(1, 4, 6, 8, 25, 36, 49, 61, 81, 100)
+plot(part_A, part_B)
+```
+
+2. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+A <- c(1:4, 2*(1:4), 3*(1:4))
+matriz_A <- matrix(A, nrow = 4, ncol = 3)
+matriz_A
+```
+
+3. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+matriz_I <- diag(3)
+matriz_I
+```
+
+4. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+Matriz_nula <- function(f,c){
+  matrix(0, nrow = f, ncol = c)
+}
+Matriz_nula(5,6)
+```
+
+5. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+diag(4)
+mod_A <- c(-1, 1, 2, 3)
+mod_B <- diag(mod_A,nrow = 4)
+modAB <- mod_B + diag(4)
+modAB
+```
+
+6. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+Transpuesta <- t(matriz_A)
+Transpuesta
+```
+
+7. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+#matriz_A + modAB
+```
+
+8. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+matriz_p <- c(1, -2, 1, 2, 4, 0, 3, -2, 1)
+matriz_p <- matrix(matriz_p, nrow = 3)
+
+funcion <- function(potencia){
+  potencia^6
+}
+funcion(matriz_p)
+```
+
+9. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+A <- c(3, 9, 3, -1, -2, 1, 1, 1, -2)
+B <- c(-1, -9, -9)
+
+matr_A <- matrix(A, nrow = 3)
+matr_B <- matrix(B, ncol = 1)
+
+inversa <- solve(matr_A) #inversa de la matriz
+inversa %*% matr_B 
+```
+
+10. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+
+eigen(cbind( 1, 3:1, 1:3)) #Determina los autovalores
+
+Z <- matrix(c(4,54,2,4,8,4,2,4,8),nrow = 3,ncol = 3) #Para los determinantes
+det(Z)
+```
+
+11. Resolución del ejercicio
+```{ message=FALSE, warning=FALSE}
+mat_B <- c(1:10, 2*(1:10), 3*(1:10), 4*(1:10), 5*(1:10))
+matriz_B <- matrix(mat_B, nrow = 10)
+
+mat_A <- c(0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0)
+matriz_A <- matrix(mat_A, nrow = 5)
+
+matriz_A %*% matriz_B
+```
+
+12. Resolución del ejercicio
+```{ message=FALSE, warning=FALSE}
+X <- matrix(c(1,1,1,1,1,1,-1,0,1,2),nrow = 5, ncol = 2)
+Y <- matrix(c(0,0,1,1,3),nrow = 5, ncol = 1)
+
+Beta <- ((t(X)%*%X)^(-1))%*%t(X)%*%Y
+Beta
+```
+
+13a. Resolución del ejercicio
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+data(co2)
+means = aggregate(co2, FUN=mean)
+year = as.vector(time(means))
+co2 = as.vector(means)
+
+datos <- data.frame(anio = year, nivel =round(co2,1))
+datos <- datos %>% 
+  dplyr::mutate(rest = c(nivel[2:39], 0)) %>% 
+  dplyr::mutate(difer = rest - nivel)
+
+result <- datos[1:38, 4]
+
+plot(year[2:39], result, xlab = "años", ylab = "valores de concentración", 
+     main = "Concentración de Co2 por años", type = "o", pch = (16), col = "black")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
