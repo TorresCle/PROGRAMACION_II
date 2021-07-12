@@ -438,81 +438,25 @@ datos <- datos %>%
   dplyr::mutate(rest = c(nivel[2:39], 0)) %>% 
   dplyr::mutate(difer = rest - nivel)
 
+
 result <- datos[1:38, 4]
 
 plot(year[2:39], result, xlab = "años", ylab = "valores de concentración", 
-     main = "Concentración de Co2 por años", type = "o", pch = (16), col = "black")
+     main = "Concentración de Co2 por años", type = "o", pch = (16), col = "black") %>% 
+  points(2020, 2.64)
 
-
-plot(year[2:39], vect, xlab = "años", ylab = "valores de concentración", 
-     main = "Concentración de Co2 por años", type = "o", pch = (16), col = "black")
-points(2020, 2.64, col = "red", pch = (4))
-
+###################################################### 
 
 
 
 
+#PREGUNTA 14:
 
 
-round(co2,2)
-###### Con dplyer ########################
-dato <- data.frame(año = year, nivel =round(co2,2))
 
 
-medi_co2 <- dplyr::tibble(anio = year, medida =round(co2,2))
-
-dato2 <- medi_co2 %>%
-  dplyr::mutate(resta_conse = c(medida[2:39], 0)) %>%
-  dplyr::mutate(diferencia = resta_conse - medida)
-
-diferencie <- dato2[1:39, 4]
 
 
-df <- data.frame(year, diferencie)
-
-
-#Para plotear
-
-plot(x = year, y= diferencie)
-
-plot(x = year[2:39], y= diferencie),
-  pch = 20, xlab = "Años",
-  ylab = "variacion CO2", main = "Concentracion de Co2 en la Atmósfera",
-  type = "o", pch = (3), col = "blue", font = 4, bg = "blue")
-
-plot(x = year[2:39], y= dato2,
-  xlab = "Años",
-  ylab = "variacion CO2", main = "Concentracion de Co2 en la Atmósfera")
-
-plot(year, dato2)
-
-
-df <- data.frame(year[1:39], dato2)
-plot(year, dato2)
-
-
-plot(year, dato2, xlab = "años", ylab = "variacion de co2")
-
- 
-x <- 1:12
-y <- c(27, 28, 26, 22, 19, 16, 14, 13, 14, 16, 20, 23)
-estaciones <- c(rep("verano", 2), rep("otoño", 3), rep("invierno", 3), rep("primavera", 3), "verano")
-
-df <- dplyr::tibble(x, y, estaciones)
-
-plot(
-  x = x, y = y, type = "o",
-  pch = 14, xlab = "Mes",
-  ylab = "Temperatura [°C]", main = "Lima, Temperatura mensual promedio"
-)
-plot(x,y)
-
-
-Alum_notas <- dplyr::tibble(grupo,nota)
-
-Alum_notas %>% 
-  dplyr::filter(grupo == "A", grupo == "B") %>% 
-  dplyr::summarise(mean(nota))
 
 
 

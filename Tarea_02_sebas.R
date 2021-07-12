@@ -27,7 +27,7 @@ I
 MN <- function(f,c){
   matrix(0, nrow = f, ncol = c)
 }
-MN(5,7)
+MN(5,6)
 
 # 5. Modificar la matriz diag(4), para que se parezca a la matriz B
 

@@ -396,12 +396,15 @@ means = aggregate(co2, FUN=mean)
 year = as.vector(time(means))
 co2 = as.vector(means)
 
-medi_co2 <- dplyr::tibble(anio = year, medida = co2)
-dato2 <- medi_co2 %>%
-  dplyr::mutate(resta_conse = c(medida[2:39], 0)) %>%
-  dplyr::mutate(diferencia = resta_conse - medida) %>% 
-  dplyr::select(diferencia)
-dato2
+datos <- data.frame(anio = year, nivel =round(co2,1))
+datos <- datos %>% 
+  dplyr::mutate(rest = c(nivel[2:39], 0)) %>% 
+  dplyr::mutate(difer = rest - nivel)
+
+result <- datos[1:38, 4]
+
+plot(year[2:39], result, xlab = "años", ylab = "valores de concentración", 
+     main = "Concentración de Co2 por años", type = "o", pch = (16), col = "black")
 ```
 
 
