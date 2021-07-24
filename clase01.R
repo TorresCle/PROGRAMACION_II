@@ -445,15 +445,25 @@ plot(year[2:39], result, xlab = "años", ylab = "valores de concentración",
      main = "Concentración de Co2 por años", type = "o", pch = (16), col = "black") %>% 
   points(2020, 2.64)
 
-###################################################### 
 
-
-
-
+###################################################################################################
+###################################################################################################
 #PREGUNTA 14:
+library(dplyr)
+df03 <- read.csv("https://raw.githubusercontent.com/ryali93/ProgramacionR/master/data/rainfall.csv")
 
-
-
+df02 <- dplyr::tibble(df03)
+df02  <-df02 %>% dplyr::filter(sep >= 180|
+                                 oct >= 180|
+                                 nov >= 180|
+                                 dec >= 180|
+                                 jan >= 180|
+                                 feb >= 180|
+                                 mar >= 180|
+                                 apr >= 180|
+                                 may >= 180) %>% 
+                                 dplyr::select(name)
+  
 
 
 
